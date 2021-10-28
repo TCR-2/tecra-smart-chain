@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  node:
+    image: ethereum/client-go:alltools-v1.10.8
+    restart: on-failure
+    ports:
+      - 8544-8546:8544-8546
+      - 30311:30311
+    volumes:
+      - ./scripts:/scripts:ro
+      - ./keystore:/keystore:ro
+      - ./genesis.json:/genesis.json:ro
+      - ./enode-keys/node.key:/enode.key:ro
+      - ./data/node/ethereum:/root/.ethereum
+      - /etc/localtime:/etc/localtime:ro
+      - ./static-nodes.json:/static-nodes.json:ro
+    command: /scripts/node.sh {replace-with-your-node-address}
